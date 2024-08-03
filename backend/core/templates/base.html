@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тестовый сайт</title>
+    <style>
+        header {
+            text-align: right;
+            max-width: 1600px;
+        }
+
+        footer {
+            text-align: center;
+        }
+        #content {
+            text-align: center;
+        }
+    </style>    
+</head>
+<body>
+{% block mainmenu %}
+<div>
+    <header>
+        <div >
+            <a href="{% url 'index' %}">Main</a> |
+            <a href="{% url 'home' %}">Home</a> |
+            {% for m in menu %}
+            {{ m }} | 
+            {% endfor %}
+        </div>
+    </header>
+{% endblock mainmenu %}
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+<footer>
+    Автор: Масалыка В.Н.
+</footer>
+</div>
+</body>
+</html>

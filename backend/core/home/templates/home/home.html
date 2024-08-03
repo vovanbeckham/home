@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<h1>test</h1>
+
+{% for sensorvalue in sensorvalues %}
+    <div>
+        <p>{{ sensorvalue.id }}. 
+            <strong>
+                {{ sensorvalue.sensor_id }} {{ sensorvalue.sensor_id.device_id.room_name  }}
+            </strong>
+        </p>
+        {{ sensorvalue.value }} {{ sensorvalue.sensor_id.unit }}
+        </div>
+
+{% endfor %}
+{% endblock %}
