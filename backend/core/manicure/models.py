@@ -38,7 +38,7 @@ class ProvidedService(models.Model):
     telegram_user = models.ForeignKey(TelegramUser, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    date = models.DateField(auto_now_add=False)
+    date = models.DateField(auto_now_add=True)
 
 
     def __str__(self) -> str:
