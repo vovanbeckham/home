@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load note_tags %}
+ 
+{% block content %}
+{% get_themes as themes %}
+    <div class="sidenav">
+        {% for theme in themes %}
+            <a href="{% url 'get-theme' theme.pk %}">{{ theme.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="main">
+    
+        {% block theme %} 
+        {% endblock %}
+    </div>
+
+{% endblock %}

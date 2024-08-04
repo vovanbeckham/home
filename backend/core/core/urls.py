@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('manicure.urls')),
     path('', include('home.urls')),
+    path('library_notes/', include('library_notes.urls')),
 ]
