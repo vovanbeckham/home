@@ -5,7 +5,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters.command import Command
 from aiogram.enums import ParseMode
-from config import API_BOT1_KEY,API_BOT2_KEY
+from config import API_BOT1_KEY,API_BOT2_KEY, TELEGRAM_USER
 from functions import auth, deleteprovided, get_button_manicure_basic, getdatatday, getmonth, parser
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -87,7 +87,7 @@ async def cmd_start(message: types.Message):
 
 
 async def message_reminder():
-    await bot.send_message(775094528, "Привет! Это Я.")
+    await bot.send_message(TELEGRAM_USER, "Привет! Это Я.")
 
 
 #----------------------------
@@ -96,8 +96,8 @@ async def message_reminder():
 scheduler.add_job(
     message_reminder, 
     'cron', 
-    hour=22, 
-    minute=0, 
+    hour=21, 
+    minute=30, 
     start_date=datetime.datetime.today()
     )
 
