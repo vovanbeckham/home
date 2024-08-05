@@ -1,4 +1,5 @@
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Theme(models.Model):
@@ -13,7 +14,7 @@ class Theme(models.Model):
 class Content(models.Model):
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    content = models.TextField()
+    content = CKEditor5Field('Text', config_name='extends')
 
 
     def __str__(self) -> str:

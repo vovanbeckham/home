@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
+from library_notes.forms import ContentForm
 from library_notes.models import Content, Theme
 
 
 
 def notes_index(request):
-    return render(request, "library_notes/index.html", locals())
+    contents = Content.objects.all().order_by('-pk')[:10]
+    return render(request, "library_notes/notes.html", locals())
 
 
 
@@ -29,4 +31,12 @@ def get_content(request, content_id):
 
 
 def content_add(request):
-    return render(request, "library_notes/index.html", locals())
+    if request.method == 'POST':
+        form = ContentForm(request.POST)
+        print(1)
+        if form.is_valid():
+            print(2)
+            form.save()
+    else:
+        form = ContentForm()
+    return render(request, "library_notes/add_content.html", locals())

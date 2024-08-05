@@ -1,0 +1,9 @@
+{% extends 'library_notes/index.html' %}
+ 
+{% block theme %} 
+    {% for content in contents %}
+        <div style="text-align: left;">
+            <a href="{% url 'get-content' content.pk %}"> {{ content.name }} </a>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -2,8 +2,8 @@
  
 {% block theme %} 
 <h1>{{ content.name }}</h1>
-    <div>
-        {{ content.content }}
+    <div style="text-align: left;">
+        {{ content.content|safe }}
     </div>
 
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'library_notes/index.html' %}
+ 
+{% block theme %} 
+<h1>{{ content.name }}</h1>
+    <div>
+        <form action="" method="post">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <input type="submit" value="Submit article">
+            </form>
+        </form>
+    </div>
+
+{% endblock %}
