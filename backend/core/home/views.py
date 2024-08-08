@@ -31,7 +31,7 @@ def graph_device(request, device_id):
     for sensor in sensors:
         if not sensor.name in sensors_dict.keys():
             sensors_dict[sensor.name] = {}
-            data = sensor.sensorvalue_set.all().order_by('-created')[:10][::-1]
+            data = sensor.sensorvalue_set.all().order_by('-created')[:50][::-1]
             sensors_dict[sensor.name]['value'] = [
                 float(value.value) for value in data
                 ]
