@@ -1,0 +1,30 @@
+
+<div>
+  {{ sensor_name }}
+</div>
+  <canvas id="myChart{{ sensor_name }}" ></canvas>
+
+  
+<script>
+  var ctx = document.getElementById('myChart{{ sensor_name }}');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ value.date|safe }},
+      datasets: [{
+        label: '{{ sensor_name }}',
+        data: {{ value.value }},
+        borderWidth: 1,
+        tension: 0.2
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

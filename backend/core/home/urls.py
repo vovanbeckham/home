@@ -6,7 +6,8 @@ from home import views as vs
 
 
 urlpatterns = [
-    path('test/', vs.home, name='home'),
+    path('', vs.home, name='home'),
+    path('graph/device/<int:device_id>/', vs.graph_device, name='graph_device'),
 ]
 
 

@@ -12,17 +12,34 @@ from home.serializers import SensorValueSerializer
 
 
 def home(request):
-    menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+    device = Device.objects.all()
     today = datetime.date.today()
-    sensors = Sensor.objects.all()
-    sensorvalues = []
-    for sensor in sensors:
-        sensorvalue = SensorValue.objects.filter(created__gte=today, sensor_id=sensor).order_by('-created').first()
-        if sensorvalue:
-            sensorvalues.append(sensorvalue)
+    for d in device:
+        d.sensors = Sensor.objects.filter(device_id=d)
+
+        for sensor in d.sensors:
+            sensor.values = SensorValue.objects.filter(created__gte=today, sensor_id=sensor).order_by('-created').first()
+            
     return render(request, "home/home.html", locals())
 
 
+def graph_device(request, device_id):
+    device = Device.objects.get(pk=device_id)
+    today = datetime.date.today()
+    sensors = Sensor.objects.filter(device_id=device)
+    sensors_dict = {}
+    for sensor in sensors:
+        if not sensor.name in sensors_dict.keys():
+            sensors_dict[sensor.name] = {}
+            data = sensor.sensorvalue_set.all().order_by('-created')[:10][::-1]
+            sensors_dict[sensor.name]['value'] = [
+                float(value.value) for value in data
+                ]
+            sensors_dict[sensor.name]['date'] = [
+                str(date.created.strftime("%H-%M")) for date in data
+                ]
+        
+    return render(request, "home/charts.html", locals())
 
 
 
@@ -85,7 +102,7 @@ class AddSensorValue(APIView):
         if sensors is None:
             return Response({"status": "Нет данных датчиков"})
         for sensor in sensors:
-            sensor_db = Sensor.objects.filter(sensor=sensor["sensor"]).first()
+            sensor_db = Sensor.objects.filter(device_id=device_db,sensor=sensor["sensor"]).first()
             if not sensor_db:
                 sensor_db = Sensor.objects.create(
                     sensor=sensor["sensor"],
