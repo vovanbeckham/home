@@ -9,7 +9,7 @@
         width: 200px; border-radius: 10px;">
             <div style="border: 2px solid darkblue; background-color: bisque; border-radius: 5px; 
             margin: 5px;">
-                {{ dev }}
+                <a href="{% url 'graph_device' dev.id %}">{{ dev }}</a>
             </div>
             {% for sensor in dev.sensors %}
                 <div style="border: 2px solid darkblue; background-color: bisque; border-radius: 5px; 
