@@ -12,11 +12,9 @@ def notes_index(request):
 
 
 def get_theme(request, theme_id):
-    print(theme_id)
     theme_id = int(theme_id)
     theme = Theme.objects.get(pk=theme_id)
     contents = Content.objects.filter(theme=theme)
-    print(contents)
     return render(request, "library_notes/gettheme.html", locals())
 
 
@@ -33,9 +31,7 @@ def get_content(request, content_id):
 def content_add(request):
     if request.method == 'POST':
         form = ContentForm(request.POST)
-        print(1)
         if form.is_valid():
-            print(2)
             form.save()
     else:
         form = ContentForm()

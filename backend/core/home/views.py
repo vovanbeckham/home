@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from home.forms import EditDeviceForm
 from home.models import Device, Sensor, SensorValue
 from home.serializers import SensorValueSerializer
 
@@ -38,9 +39,25 @@ def graph_device(request, device_id):
             sensors_dict[sensor.name]['date'] = [
                 str(date.created.strftime("%H-%M")) for date in data
                 ]
-        
+            sensors_dict[sensor.name]['max'] = int(max(sensors_dict[sensor.name]['value']))+5
+            sensors_dict[sensor.name]['min'] = int(min(sensors_dict[sensor.name]['value']))-5
     return render(request, "home/charts.html", locals())
 
+
+
+def edit_device(request, device_id):
+    device = Device.objects.get(pk=device_id)
+    today = datetime.date.today()
+    sensors = Sensor.objects.filter(device_id=device)
+    sensors_dict = {}
+    dict_form = []
+    for index, sensor in enumerate(sensors):
+        dict_form.append(EditDeviceForm(request.POST or None, instance=sensor, prefix='%s' % (index)))
+    
+    if request.method == 'POST':
+        for form in dict_form:
+            obj = form.save()
+    return render(request, "home/edit-device.html", locals())
 
 
 

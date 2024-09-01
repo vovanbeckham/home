@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load home_tags %} 
+ 
+{% block mainmenu %}
+{% get_device as devices %}
+
+<aside class="sidebar">
+
+    {% for dev in devices %}
+        <a href="{% url 'graph_device' dev.id %}">{{ dev }}</a>
+    {% endfor %}
+</aside>
+
+
+{% endblock mainmenu %}
+
+{% block content %}
+    {% block theme %} 
+    {% endblock %}
+{% endblock %}
