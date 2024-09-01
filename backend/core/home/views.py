@@ -32,15 +32,16 @@ def graph_device(request, device_id):
     for sensor in sensors:
         if not sensor.name in sensors_dict.keys():
             sensors_dict[sensor.name] = {}
-            data = sensor.sensorvalue_set.all().order_by('-created')[:50][::-1]
-            sensors_dict[sensor.name]['value'] = [
-                float(value.value) for value in data
-                ]
-            sensors_dict[sensor.name]['date'] = [
-                str(date.created.strftime("%H-%M")) for date in data
-                ]
-            sensors_dict[sensor.name]['max'] = int(max(sensors_dict[sensor.name]['value']))+5
-            sensors_dict[sensor.name]['min'] = int(min(sensors_dict[sensor.name]['value']))-5
+            data = sensor.sensorvalue_set.filter(created__gte=today).order_by('-created')
+            if data:
+                sensors_dict[sensor.name]['value'] = [
+                    float(value.value) for value in data
+                    ]
+                sensors_dict[sensor.name]['date'] = [
+                    str(date.created.strftime("%H-%M")) for date in data
+                    ]
+                sensors_dict[sensor.name]['max'] = int(max(sensors_dict[sensor.name]['value']))+5
+                sensors_dict[sensor.name]['min'] = int(min(sensors_dict[sensor.name]['value']))-5
     return render(request, "home/charts.html", locals())
 
 
