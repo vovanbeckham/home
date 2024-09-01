@@ -1,0 +1,15 @@
+{% extends 'home/index.html' %}
+ 
+{% block content %}
+<h1>{{ device.room_name }}</h1>
+
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for form in dict_form %}
+            {{ form.as_p }}
+        {% endfor %}
+        <button>SAVE</button>
+    </form>
+
+{% endblock %}

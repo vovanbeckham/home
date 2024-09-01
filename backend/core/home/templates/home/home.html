@@ -1,25 +1,15 @@
-{% extends 'base.html' %}
- 
-{% block content %}
-<h1>test</h1>
+{% extends 'home/index.html' %}
 
-<div>
+{% block theme %}
+
+<div class="main">
     {% for dev in device %}
-        <div style="display: inline-block; border: 2px solid blue;
-        width: 200px; border-radius: 10px;">
-            <div style="border: 2px solid darkblue; background-color: bisque; border-radius: 5px; 
-            margin: 5px;">
-                {{ dev }}
-            </div>
+
+        <div class="room">
+            <h3>{{ dev }}</h3>
+            
             {% for sensor in dev.sensors %}
-                <div style="border: 2px solid darkblue; background-color: bisque; border-radius: 5px; 
-            margin: 5px;">
-                        <div>
-                            {{ sensor.name  }}
-                        </div>
-                    
-                    {{ sensor.values.value }} {{ sensor.unit }}
-                </div>
+                <div class="sensor">{{ sensor.name  }}: {{ sensor.values.value }} {{ sensor.unit }}</div>
             {% endfor %}
         </div>
     {% endfor %}

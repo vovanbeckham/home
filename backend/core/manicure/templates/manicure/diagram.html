@@ -1,0 +1,32 @@
+
+<div>
+    
+  </div>
+    <canvas id='myChart{{ service.month|date:"Y-m-d" }}' ></canvas>
+  
+    
+  <script>
+    var ctx = document.getElementById('myChart{{ service.month|date:"Y-m-d" }}');
+    Chart.defaults.color = '#FFF';
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ service.label|safe }},
+        datasets: [{
+          label: '{{ service.month|date:"F" }}',
+          data: {{ service.data|safe }},
+          borderWidth: 1,
+          tension: 0.2,
+          borderColor: '#36A2EB',
+          backgroundColor: '#9BD0F5',
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        }
+      }
+    });
+  </script>

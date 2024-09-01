@@ -1,85 +1,36 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Тестовый сайт</title>
-    <style>
-        body {
-            margin: 0;
-            }
-        header {
-            text-align: right;
-            height: 30px;
-            background-color: black;
-            color: aliceblue;
-        }
-        header a {
-            color: aliceblue;
-        }
-        header div {
-            padding-top: 5px;
-            max-width: 1600px;
-        }
-
-        footer {
-            text-align: center;
-        }
-        #content {
-            text-align: center;
-        }
-    .sidenav {
-        height: 100%;
-        width: 160px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 20px;
-    }
-    
-    .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-    
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-    
-    .main {
-        margin-left: 160px; /* Same as the width of the sidenav */
-        font-size: 16px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-    }
-    
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-    </style>    
+    <link type="text/css" href="{% static '/css/main.css' %}" rel="stylesheet" />
 </head>
 <body>
-{% block mainmenu %}
-<div>
+
     <header>
-        <div >
-            <a href="{% url 'index' %}">Главная</a> |
-            <a href="{% url 'home' %}">Дом</a> |
-            <a href="{% url 'notes-index' %}">Заметки</a> |
-        </div>
+        <nav>
+            <a href="{% url 'index' %}">Главная</a>
+            <a href="{% url 'home' %}">Дом</a>
+            <a href="{% url 'notes-index' %}">Заметки</a>
+        </nav>
     </header>
-{% endblock mainmenu %}
-<div id="content">
-{% block content %}
-{% endblock %}
-</div>
-<footer>
-    Автор: Масалыка В.Н.
-</footer>
-</div>
+    <div class="container">
+
+        {% block mainmenu %}
+        {% endblock mainmenu %}
+        <main class="content">
+
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer>
+        &copy; 2024 Ваш сайт. Все права защищены. Автор: Масалыка В.Н.
+    </footer>
+
+
+
 </body>
 </html>

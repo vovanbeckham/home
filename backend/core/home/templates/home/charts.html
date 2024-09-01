@@ -1,19 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'home/index.html' %}
  
 {% block content %}
 <h1>{{ device.room_name }}</h1>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% for sensor_name, value in sensors_dict.items %}
-<div 
-style="display:inline-block; 
-min-width: 300px; 
-width: 100%; 
-max-width: 500px;"
->
-    {% include 'home/graph_line.html' %}
-</div>
+    <div 
+    style="display:inline-block; 
+    min-width: 300px; 
+    width: 100%; 
+    max-width: 500px;"
+    >
+            {% include 'home/graph_line.html' %}
+    </div>
     
 
 {% endfor %}
+<div> <a href="{% url 'edit_device' device_id %}">Редактировать</a></div>
 {% endblock %}
