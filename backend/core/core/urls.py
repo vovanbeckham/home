@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('manicure.urls')),
     path('home/', include('home.urls')),
     path('library_notes/', include('library_notes.urls')),
+    path('user/', include('users.urls')),
 ]
 
 urlpatterns += [
