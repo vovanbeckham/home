@@ -6,5 +6,5 @@ from manicure import views as vs
 
 
 urlpatterns = [
-    path('', vs.index, name='index'),
+    path('', vs.index, name='manicure'),
 ]

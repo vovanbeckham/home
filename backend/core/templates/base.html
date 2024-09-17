@@ -11,12 +11,14 @@
 
     <header>
         <nav>
-            <a href="{% url 'index' %}">Главная</a>
-            <a href="{% url 'home' %}">Дом</a>
             <a href="{% url 'notes-index' %}">Заметки</a>
             {% if user.is_authenticated %}
+                <a href="{% url 'home' %}">Дом</a>
+                <a href="{% url 'manicure' %}">Маникюр</a>
+                <a href="#">{{ user }}</a>
                 <a href="{% url 'logout' %}">Выход</a>
             {% else %}
+                <a href="{% url 'register' %}">Регистрация</a>
                 <a href="{% url 'login' %}">Вход</a>
             {% endif %}
         </nav>
