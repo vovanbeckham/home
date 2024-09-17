@@ -20,6 +20,7 @@ def logout_view(request):
 
 
 def register(request):
+    title = 'Регистрация'
     if request.method == "POST":
         form = RegisterUserForm(request.POST)
         if form.is_valid():
@@ -29,4 +30,4 @@ def register(request):
             return redirect('notes-index')
     else:
         form = RegisterUserForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/register.html', locals())
