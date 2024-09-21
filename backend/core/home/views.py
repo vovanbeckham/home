@@ -1,5 +1,7 @@
 import datetime
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,6 +15,9 @@ from home.serializers import SensorValueSerializer
 
 
 def home(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Доступ запрещен!')
+        return redirect('notes-index')
     device = Device.objects.all()
     today = datetime.date.today()
     for d in device:
@@ -25,6 +30,9 @@ def home(request):
 
 
 def graph_device(request, device_id):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Доступ запрещен!')
+        return redirect('notes-index')
     device = Device.objects.get(pk=device_id)
     today = datetime.date.today()
     sensors = Sensor.objects.filter(device_id=device)
@@ -47,6 +55,9 @@ def graph_device(request, device_id):
 
 
 def edit_device(request, device_id):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Доступ запрещен!')
+        return redirect('notes-index')
     device = Device.objects.get(pk=device_id)
     today = datetime.date.today()
     sensors = Sensor.objects.filter(device_id=device)

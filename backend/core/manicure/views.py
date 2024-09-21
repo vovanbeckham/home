@@ -1,5 +1,6 @@
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib import messages
 
 from manicure.functions import get_data_service
 
@@ -7,6 +8,9 @@ from manicure.functions import get_data_service
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Доступ запрещен!')
+        return redirect('notes-index')
     service_dict = get_data_service()
 
 

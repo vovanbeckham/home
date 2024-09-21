@@ -39,7 +39,7 @@ SECRET_KEY = 'django-insecure-_sgm4uh-jmf6w9y4v87ervni2wgxao%^#28+r-_qg19!ou(0*!
 DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://nearby-ape-awake.ngrok-free.app','https://*.127.0.0.1']
 
 # Application definition
 
@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'libs.middlewares.before_and_after_view_actions.BeforeAndAfterViewActions',
 ]
 
 ROOT_URLCONF = 'core.urls'

@@ -1,7 +1,7 @@
 from django import forms
 
 from django_ckeditor_5.widgets import CKEditor5Widget
-from library_notes.models import Content
+from library_notes.models import Content, Theme
 
 
 class ContentForm(forms.ModelForm):
@@ -20,3 +20,13 @@ class ContentForm(forms.ModelForm):
               )
           }
 
+
+class ThemeForm(forms.ModelForm):
+      """Form for comments to the article."""
+
+      def __init__(self, *args, **kwargs):
+          super().__init__(*args, **kwargs)
+
+      class Meta:
+          model = Theme
+          fields = ("name",)

@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% block title %}
+    Заметки
+{% endblock %}
 {% load note_tags %}
  
 {% block mainmenu %}
 
 {% get_themes as themes %}
 <aside class="sidebar">
-    
+    {% if user.is_authenticated %}
+        <a href="{% url 'add-theme' %}">Добавить тему</a>
+        <a href="{% url 'add-content' %}">Добавить запись</a>
+    {% endif %}
     {% for theme in themes %}
         <a href="{% url 'get-theme' theme.pk %}">{{ theme.name }}</a>
     {% endfor %}

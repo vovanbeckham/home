@@ -5,11 +5,9 @@
 <html>
 <head>
     <title>
-    {% if title %}
-        {{ title }}
-    {% else %}
-        Тестовый сайт
-    {% endif %}
+        {% block title %}
+
+        {% endblock %}
     </title>
     <link type="text/css" href="{% static '/css/main.css' %}" rel="stylesheet" />
 </head>
@@ -29,6 +27,31 @@
             {% endif %}
         </nav>
     </header>
+    {% if messages %}
+        <div id="popup">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+
+        <script>
+                const popup = document.getElementById('popup');
+                popup.style.display = 'block'; // Показываем попап
+                popup.style.visibility = 'visible'; // Делаем его видимым
+                popup.style.opacity = '1'; // Устанавливаем полную непрозрачность
+
+                // Через 3 секунды начинаем исчезновение
+                setTimeout(() => {
+                    popup.style.opacity = '0'; // Уменьшаем непрозрачность до 0
+                    popup.style.visibility = 'hidden'; // Скрываем попап
+
+                    // Убираем попап из потока документа
+                    setTimeout(() => {
+                        popup.style.display = 'none'; // Делаем его невидимым после анимации
+                    }, 1000); // Это время должно совпадать с time в CSS (1s)
+                }, 3000); // Попап будет виден 3 секунды
+        </script>
+    {% endif %}
     <div class="container">
 
         {% block mainmenu %}
