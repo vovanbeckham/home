@@ -9,7 +9,10 @@ from library_notes.models import Content, Theme
 
 
 def notes_index(request):
-    contents = Content.objects.all().order_by('-pk')[:10]
+    if request.user.is_authenticated:
+        contents = Content.objects.all().order_by('-pk')[:10]
+    else:
+        contents = Content.objects.filter(is_published=True).order_by('-pk')[:10]
     return render(request, "library_notes/notes.html", locals())
 
 

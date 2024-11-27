@@ -1,0 +1,26 @@
+{% extends 'manicure/index.html' %}
+
+ 
+    {% block manicure %}
+    <h1>SERVICES</h1>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        {% for service in service_dict %}
+            <div 
+            style="display:inline-block; 
+            min-width: 500px; 
+            width: 100%; 
+            max-width: 800px;
+            border: 2px solid #2E9AFF;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;"
+            >
+                    {% include 'manicure/diagram.html' %}
+            <div>{{ service.sum }} руб.</div>
+            </div>
+            
+
+        {% endfor %}
+
+    {% endblock %}

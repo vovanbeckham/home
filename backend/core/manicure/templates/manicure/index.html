@@ -1,26 +1,20 @@
 {% extends 'base.html' %}
+
+{% block mainmenu %}
+
+<aside class="sidebar">
+
+        <a href="{% url 'manicure_by_dates' %}">По дням недели</a>
+        <a href="{% url 'manicure_by_services' %}">По услугам</a>
+        
+</aside>
+
+
+{% endblock mainmenu %}
  
 {% block content %}
+    {% block manicure %}
 
+    {% endblock %}
 
-    <h1></h1>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        {% for service in service_dict %}
-            <div 
-            style="display:inline-block; 
-            min-width: 500px; 
-            width: 100%; 
-            max-width: 1200px;
-            border: 2px solid #2E9AFF;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;"
-            >
-                    {% include 'manicure/diagram.html' %}
-            <div>{{ service.sum }} руб.</div>
-            </div>
-            
-
-        {% endfor %}
 {% endblock %}

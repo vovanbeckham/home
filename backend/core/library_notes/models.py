@@ -15,6 +15,7 @@ class Content(models.Model):
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     content = CKEditor5Field('Text', config_name='extends')
+    is_published = models.BooleanField(default=True)
 
 
     def __str__(self) -> str:

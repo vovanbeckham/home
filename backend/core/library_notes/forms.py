@@ -13,7 +13,7 @@ class ContentForm(forms.ModelForm):
 
       class Meta:
           model = Content
-          fields = ("theme", "name", "content")
+          fields = ("theme", "name", "content", "is_published")
           widgets = {
               "text": CKEditor5Widget(
                   attrs={"class": "django_ckeditor_5"}, config_name="comment"
