@@ -25,6 +25,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('', include('library_notes.urls')),
     path('user/', include('users.urls')),
+    path('expenses/', include('expenses.urls')),
 ]
 
 urlpatterns += [
